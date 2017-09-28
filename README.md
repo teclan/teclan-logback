@@ -54,3 +54,131 @@
 		</root>
 	</configuration>
   ```
+  
+  ## 每个日志级别指定一个输出文件
+  
+  参考以下
+  ```
+  <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoder 默认配置为PatternLayoutEncoder -->
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36}[%L] - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="DEBUG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/teclan-lvzaotou-debug.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/teclan-lvzaotou-debug-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- <fileNamePattern>log/teclan-lvzaotou-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern> -->
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- max size of log file -->
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+            <level>DEBUG</level> 
+            <onMatch>ACCEPT</onMatch> 
+            <onMismatch>DENY</onMismatch> 
+        </filter> 
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36}[%L] - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="INFO"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/teclan-lvzaotou-info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/teclan-lvzaotou-info-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- <fileNamePattern>log/teclan-lvzaotou-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern> -->
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- max size of log file -->
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+            <level>INFO</level> 
+            <onMatch>ACCEPT</onMatch> 
+            <onMismatch>DENY</onMismatch> 
+        </filter> 
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36}[%L] - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="WARN"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/teclan-lvzaotou-warn.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/teclan-lvzaotou-warn-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- <fileNamePattern>log/teclan-lvzaotou-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern> -->
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- max size of log file -->
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+            <level>WARN</level> 
+            <onMatch>ACCEPT</onMatch> 
+            <onMismatch>DENY</onMismatch> 
+        </filter> 
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36}[%L] - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="ERROR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/teclan-lvzaotou-erro.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/teclan-lvzaotou-error-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- <fileNamePattern>log/teclan-lvzaotou-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern> -->
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<!-- max size of log file -->
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+            <level>ERROR</level> 
+            <onMatch>ACCEPT</onMatch> 
+            <onMismatch>DENY</onMismatch> 
+        </filter> 
+		<encoder>
+			<pattern>%d [%thread] %-5level %logger{36}[%L] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DEBUG" />
+		<appender-ref ref="INFO" />
+		<appender-ref ref="WARN" />
+		<appender-ref ref="ERROR" />
+	</root>
+</configuration>
+  ```
